@@ -1,0 +1,129 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "royalty-summary",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.2,
+      "position": [
+        0,
+        0
+      ],
+      "id": "ac3b4f7b-de99-4b28-a98e-d4405987ca92",
+      "name": "Webhook",
+      "webhookId": "afe7845d-9423-4b00-b5f5-dd20eac517a5"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "models/gemini-3.8-flash",
+          "mode": "id"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=Generate a professional royalty summary email for the author in the supplied JSON.\n\nInclude the author's name, each book's status, copies sold, total royalty earned, royalty paid, pending royalty, and totals across all books.\n\nMention quarterly payouts within 45 days after quarter-end and the ₹1,000 minimum payout threshold. Include production books and their statuses. Never invent missing information or calculate royalties from MRP.\n\nUse a warm, professional tone.\n\nInput data:\n{{ JSON.stringify($json) }}"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.googleGemini",
+      "typeVersion": 1.2,
+      "position": [
+        448,
+        0
+      ],
+      "id": "8c4d27c0-25e7-4c99-b1fc-9fe04d3f1f75",
+      "name": "Message a model",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "Ry67Rpt7d0y2YG56",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "https://harshitabisht794.bubbleapps.io/version-test/api/1.1/obj/Author",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        224,
+        240
+      ],
+      "id": "3a459168-f63a-45d7-a4a4-504eb577a837",
+      "name": "HTTP Request"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://harshitabisht794.bubbleapps.io/version-test/api/1.1/wf/log_royalty_notification",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "{\n  \"request_id\": \"royalty-test-003\",\n  \"author_code\": \"AUTH001\",\n  \"status\": \"Success\",\n  \"email_subject\": \"Your Royalty Summary\",\n  \"email_body\": \"REPLACE_WITH_GEMINI_OUTPUT\",\n  \"error_message\": \"\",\n  \"started_at\": \"2026-10-27T00:00:00.000Z\",\n  \"completed_at\": \"2026-10-27T00:01:00.000Z\",\n  \"workflow_execution_id\": \"n8n-test\"\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.5,
+      "position": [
+        816,
+        0
+      ],
+      "id": "7a17009f-a954-4a39-90a8-d700013dccdf",
+      "name": "HTTP Request1",
+      "disabled": true
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "bb2bf814-a30e-4b7a-a610-2df098de77b1",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "91055466ed1ffc6bc681d0eda0d52155c0dfa986a660e0b6e0ff0716ca987cd5"
+  },
+  "nodeGroups": [],
+  "id": "QADYVHYPANtuPaui",
+  "tags": []
+}
