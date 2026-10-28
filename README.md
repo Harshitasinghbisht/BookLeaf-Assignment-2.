@@ -49,7 +49,22 @@ This project is an author royalty dashboard and admin portal built with Bubble, 
 5. Open the exported n8n workflow and send a POST request to the `royalty-summary` webhook with sample author and book data.
 6. Inspect the successful execution output from the Google Gemini node to review the generated email draft.
 
-Do not commit passwords, API keys, webhook secrets, or other credentials to this repository.
+## Test Credentials
+
+Use the following accounts to test the application.
+
+### Author Account
+- **Email:** `priya.sharma@email.com`
+- **Password:** `TestAuthor@2026`
+
+### Admin Account
+- **Email:** `rohit.kapoor@email.com`
+- **Password:** `testAdmin@2026`
+
+### Testing Instructions
+1. Open the application using the deployed application URL.
+2. Log in using the Author credentials to explore the Author dashboard and its features.
+3. Log out and log in using the Admin credentials to explore the Admin dashboard and administrative features.
 
 ## Current Limitations
 
