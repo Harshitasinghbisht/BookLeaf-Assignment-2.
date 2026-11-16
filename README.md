@@ -70,7 +70,7 @@ Use the following accounts to test the application.
 
 Watch the video demonstration of the application, including the Author and Admin dashboards, key features, and workflow.
 
-**Demo Video:** [Watch the Assignment Demo](https://drive.google.com/file/d/1ISIFJly5QhAHrScOs1pKlMFuKKidFc8C/view?usp=drive_link)
+**Demo Video:** [Watch the Assignment Demo](https://drive.google.com/file/d/14ZtbOtf3Vv9-1mhzlpdsemQnGMv93j_G/view?usp=drive_link)
 ## Current Limitations
 
 - Gemini email draft generation has been tested in n8n.
